@@ -16,19 +16,19 @@ public class FileManager {
 	 * @return una lista de numeros pseudoaleatorios enteros leidos del archivo
 	 * @throws IOException excepcion de lectura de archivos
 	 */
-	public ArrayList<Integer> readFile(String pathname, String separator) throws IOException {
+	public ArrayList<Double> readFile(String pathname, String separator) throws IOException {
 		File file = new File(pathname);
 
 		FileReader fileReader = new FileReader(file);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-		ArrayList<Integer> pseudoNumbers = new ArrayList<Integer>();
+		ArrayList<Double> pseudoNumbers = new ArrayList<Double>();
 
 		String data = "";
 		while ((data = bufferedReader.readLine()) != null) {
 			String[] lineData = data.split(separator);
 			for (String number : lineData) {
-				pseudoNumbers.add(Integer.parseInt(number));
+				pseudoNumbers.add(Double.parseDouble(number));
 			}
 		}
 
