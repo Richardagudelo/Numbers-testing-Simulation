@@ -3,6 +3,7 @@ package views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,10 +11,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import constants.MyConstants;
+import views.components.OwnJFileChooser;
 
 public class PruebasMainWindow extends JFrame {
 
 	private JTabbedPane panelesPruebas;
+	private OwnJFileChooser fileChooser;
 
 	private PanelMedias panelMedias;
 	private PanelVarianza panelVarianza;
@@ -51,7 +54,14 @@ public class PruebasMainWindow extends JFrame {
 
 		add(panelesPruebas);
 
+		fileChooser = new OwnJFileChooser();
+
 		setVisible(true);
+	}
+
+	public File getFileFromFileChooser() {
+		int option = fileChooser.showOpenDialog(this);
+		return option != 1 ? fileChooser.getSelectedFile() : null;
 	}
 
 	/**

@@ -37,25 +37,31 @@ public class Medias {
 	 */
 	public boolean mediasTesting(double acceptanceMargin, ArrayList<Double> pseudoNumbers) {
 //		n = pseudoNumbers.size();
-		n = 0;
+		n = 50;
 
 		alpha = 1 - acceptanceMargin;
 
 		x = 1 - (alpha / 2);
 
+		double miu = this.findAverageOfPseudoNumbers(pseudoNumbers);
+		
+		double varianza = 0;
+		double sumatoriaVarianza = 0;
+		for (int i = 0; i < n; i++) {
+			
+		}
+		
 		// Math.exp
 		z = 0.975;
 		// valor dentro de la tabla de distro normal
 		// por ejemplo como x me da 0.9750
 		// entonces z debe dar 1.9600
-		System.out.println(Math.exp(-Math.pow(z, 2) / 2) / Math.sqrt(2 * Math.PI));
 
 		lowerLimit = (0.5) - (z * (1 / Math.sqrt(12 * n)));
 
 		upperLimit = (0.5) + (z * (1 / Math.sqrt(12 * n)));
 
-		double average = this.findAverageOfPseudoNumbers(pseudoNumbers);
-		if (average >= lowerLimit && average <= upperLimit) {
+		if (miu >= lowerLimit && miu <= upperLimit) {
 			return true;
 		} else
 			return false;

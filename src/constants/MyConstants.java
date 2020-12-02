@@ -8,6 +8,7 @@ public class MyConstants {
 
 	// Column identifiers
 	public static final String COLI_BASIC[] = { "i", "Xi", "Ri", "Ni" };
+	public static final String RI_NUMBERS[] = { "RI" };
 
 	// Labels
 

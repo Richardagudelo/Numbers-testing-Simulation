@@ -31,6 +31,9 @@ public class Control implements ActionListener {
 			break;
 		case POKER:
 			break;
+		case SELECT_FILE:
+			mainW.getFileFromFileChooser();
+			break;
 		}
 	}
 }

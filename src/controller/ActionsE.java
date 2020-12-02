@@ -6,5 +6,6 @@ public enum ActionsE {
 	VARIANZA,
 	KS,
 	CHI2,
-	POKER;
+	POKER,
+	SELECT_FILE;
 }

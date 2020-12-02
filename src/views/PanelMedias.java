@@ -3,12 +3,14 @@ package views;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import constants.MyConstants;
 import controller.ActionsE;
 import views.components.OwnJButton;
 import views.components.OwnJLabel;
@@ -23,35 +25,24 @@ public class PanelMedias extends JPanel {
 		GridBagConstraints c = new GridBagConstraints();
 		createGrid(c);
 
-		c.gridy = 0;
-		c.weighty = 0.1;
-		c.gridx = 0;
-		c.gridwidth = 1;
-		add(new OwnJLabel("Label ejemplo"), c);
-		
-		c.gridy = 0;
-		c.weighty = 0.1;
-		c.gridx = 1;
-		c.gridwidth = 1;
-		add(new OwnJLabel("Label2 ejemplo"), c);
+		JPanel pnlElements = new JPanel(new GridLayout(1, 4));
+
+		pnlElements.add(new OwnJLabel("Hola"));
+		pnlElements.add(new OwnJLabel("Mundo"));
+		pnlElements.add(new OwnJButton("Prueba de medias", ActionsE.MEDIAS, actionListener));
+		pnlElements.add(new OwnJButton("Abrir archivo", ActionsE.SELECT_FILE, actionListener));
 
 		c.gridy = 0;
-		c.weighty = 0.1;
-		c.gridx = 2;
-		c.gridwidth = 1;
-		add(new OwnJButton("Prueba Medias", ActionsE.MEDIAS, actionListener), c);
+		c.weighty = 0.2;
+		c.gridx = 0;
+		c.gridwidth = 12;
+		add(pnlElements, c);
 		
 		c.gridy = 1;
-		c.weighty = 0.05;
-		c.gridx = 0;
-		c.gridwidth = 12;
-		add(new OwnJLabel(" "), c);
-		
-		c.gridy = 2;
-		c.weighty = 0.85;
-		c.gridx = 0;
-		c.gridwidth = 12;
-		add(new JScrollPane(new OwnJTable()), c);
+		c.weighty = 0.8;
+		c.gridx = 5;
+		c.gridwidth = 2;
+		add(new JScrollPane(new OwnJTable(MyConstants.RI_NUMBERS)), c);
 	}
 
 	/**

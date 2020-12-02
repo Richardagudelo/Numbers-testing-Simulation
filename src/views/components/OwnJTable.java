@@ -2,6 +2,8 @@ package views.components;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import constants.MyConstants;
@@ -10,9 +12,9 @@ public class OwnJTable extends JTable {
 
 	private DefaultTableModel dtmElements;
 
-	public OwnJTable() {
+	public OwnJTable(String[] columnIdentifiers) {
 		dtmElements = new DefaultTableModel();
-		dtmElements.setColumnIdentifiers(MyConstants.COLI_BASIC);
+		dtmElements.setColumnIdentifiers(columnIdentifiers);
 		setModel(dtmElements);
 
 		getTableHeader().setReorderingAllowed(false);
@@ -25,14 +27,15 @@ public class OwnJTable extends JTable {
 		setForeground(Color.BLACK);
 	}
 
-//	public void manageTableData(String[] columnIdentifiers, ArrayList<DataForTable> dataForTable) {
-//		dtmElements.setColumnIdentifiers(columnIdentifiers);
-//		dtmElements.setRowCount(0);
-//		
-//		for (DataForTable data : dataForTable) {
-//			dtmElements.addRow(data.getDataForTable());
-//		}
-//	}
+	public void manageTableData(String[] columnIdentifiers, ArrayList<Double> dataForTable) {
+		dtmElements.setColumnIdentifiers(columnIdentifiers);
+		dtmElements.setRowCount(0);
+
+		for (Double number : dataForTable) {
+			Object[] a = {number};
+			dtmElements.addRow(a);
+		}
+	}
 
 	private static final long serialVersionUID = 1L;
 }
