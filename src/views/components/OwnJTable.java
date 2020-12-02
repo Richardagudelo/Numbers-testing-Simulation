@@ -27,8 +27,7 @@ public class OwnJTable extends JTable {
 		setForeground(Color.BLACK);
 	}
 
-	public void manageTableData(String[] columnIdentifiers, ArrayList<Double> dataForTable) {
-		dtmElements.setColumnIdentifiers(columnIdentifiers);
+	public void manageTableData(ArrayList<Double> dataForTable) {
 		dtmElements.setRowCount(0);
 
 		for (Double number : dataForTable) {

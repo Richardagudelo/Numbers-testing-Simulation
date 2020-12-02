@@ -27,6 +27,8 @@ public class Medias {
 	/** Limite superior de aceptación */
 	private double upperLimit;
 
+	private double miu;
+
 	/**
 	 * Ejecuta la prueba de medias
 	 * 
@@ -36,26 +38,23 @@ public class Medias {
 	 * @return si el conjunto de números pseudoaleatorios pasa la prueba o no
 	 */
 	public boolean mediasTesting(double acceptanceMargin, ArrayList<Double> pseudoNumbers) {
-//		n = pseudoNumbers.size();
-		n = 50;
+		n = pseudoNumbers.size();
 
 		alpha = 1 - acceptanceMargin;
 
 		x = 1 - (alpha / 2);
 
-		double miu = this.findAverageOfPseudoNumbers(pseudoNumbers);
-		
-		double varianza = 0;
+		miu = this.findAverageOfPseudoNumbers(pseudoNumbers);
+
 		double sumatoriaVarianza = 0;
-		for (int i = 0; i < n; i++) {
-			
+		for (Double pseudoNumber : pseudoNumbers) {
+			sumatoriaVarianza += Math.pow((pseudoNumber - miu), 2);
 		}
-		
-		// Math.exp
-		z = 0.975;
-		// valor dentro de la tabla de distro normal
-		// por ejemplo como x me da 0.9750
-		// entonces z debe dar 1.9600
+		double varianza = sumatoriaVarianza / n;
+
+		double desvEstandar = Math.sqrt(varianza);
+
+		z = (x - miu) / desvEstandar;
 
 		lowerLimit = (0.5) - (z * (1 / Math.sqrt(12 * n)));
 
@@ -82,27 +81,7 @@ public class Medias {
 		return accumulatedSum / this.n;
 	}
 
-	public static double percentile_z(double p) {
-		double a0 = 2.5066282, a1 = -18.6150006, a2 = 41.3911977, a3 = -25.4410605, b1 = -8.4735109, b2 = 23.0833674,
-				b3 = -21.0622410, b4 = 3.1308291, c0 = -2.7871893, c1 = -2.2979648, c2 = 4.8501413, c3 = 2.3212128,
-				d1 = 3.5438892, d2 = 1.6370678;
-
-		double z = 0;
-		double r = 0;
-		
-		if (p > 0.42) {
-			r = Math.sqrt(-Math.log(0.5 - p));
-			z = (((c3 * r + c2) * r + c1) * r + c0) / ((d2 * r + d1) * r + 1);
-		} else {
-			r = p * p;
-			z = p * (((a3 * r + a2) * r + a1) * r + a0) / ((((b4 * r + b3) * r + b2) * r + b1) * r + 1);
-		}
-		return z;
-	}
-
-	public static void main(String[] args) {
-		Medias medias = new Medias();
-
-		System.out.println(percentile_z(0.6628));
+	public Object[] getResults() {
+		return new Object[] { alpha, n, miu, x, z, lowerLimit, upperLimit };
 	}
 }

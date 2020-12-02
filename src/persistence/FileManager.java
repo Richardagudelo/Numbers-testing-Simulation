@@ -10,16 +10,12 @@ public class FileManager {
 
 	/**
 	 * Lee un archivo tipo .txt especificado
-	 * 
-	 * @param pathname  la ruta donde esta el archivo, llegara en JFileChooser
-	 * @param separator el separador del archivo, ej comas, se pedira por UI
-	 * @return una lista de numeros pseudoaleatorios enteros leidos del archivo
+	 * @param fileToRead el archivo a leer viene del controlador
+	 * @return una lista de numeros pseudoaleatorios leidos, decimales
 	 * @throws IOException excepcion de lectura de archivos
 	 */
-	public ArrayList<Double> readFile(String pathname) throws IOException {
-		File file = new File(pathname);
-
-		FileReader fileReader = new FileReader(file);
+	public ArrayList<Double> readFile(File fileToRead) throws IOException {
+		FileReader fileReader = new FileReader(fileToRead);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 		ArrayList<Double> pseudoNumbers = new ArrayList<Double>();
