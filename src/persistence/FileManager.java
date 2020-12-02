@@ -16,7 +16,7 @@ public class FileManager {
 	 * @return una lista de numeros pseudoaleatorios enteros leidos del archivo
 	 * @throws IOException excepcion de lectura de archivos
 	 */
-	public ArrayList<Double> readFile(String pathname, String separator) throws IOException {
+	public ArrayList<Double> readFile(String pathname) throws IOException {
 		File file = new File(pathname);
 
 		FileReader fileReader = new FileReader(file);
@@ -26,9 +26,9 @@ public class FileManager {
 
 		String data = "";
 		while ((data = bufferedReader.readLine()) != null) {
-			String[] lineData = data.split(separator);
+			String[] lineData = data.split("#");
 			for (String number : lineData) {
-				pseudoNumbers.add(Double.parseDouble(number));
+				pseudoNumbers.add(Double.parseDouble(number.replace(',', '.')));
 			}
 		}
 
