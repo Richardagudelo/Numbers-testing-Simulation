@@ -8,7 +8,9 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
+import constants.MyConstants;
 import models.KS;
+import models.Medias;
 import models.Varianza;
 import persistence.FileManager;
 import views.PruebasMainWindow;;
@@ -91,7 +93,8 @@ public class Control implements ActionListener {
 		aux.add(0.700753);	aux.add(0.391825);	aux.add(0.346095);	aux.add(0.517212);	aux.add(0.824114);	
 		aux.add(0.427438);	aux.add(0.443694);	aux.add(0.161216);	aux.add(0.376285);	aux.add(0.348020);
 		return aux;
-
+	}
+		
 	private void medias() {
 		ArrayList<Double> pseudoRandomNumbers = new ArrayList<Double>();
 		try {
