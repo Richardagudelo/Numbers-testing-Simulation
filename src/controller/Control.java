@@ -2,6 +2,10 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.io.File;
+import java.io.IOException;
+
 import java.util.ArrayList;
 
 import models.KS;
@@ -11,12 +15,18 @@ import views.PruebasMainWindow;;
 
 public class Control implements ActionListener {
 
+	private Medias medias;
+
 	private FileManager fileManager;
 	private PruebasMainWindow mainW;
 	private Varianza varianza;
 	private KS ks;
 
+	private static File FILETOREAD;
+
 	public Control() {
+		medias = new Medias();
+
 		fileManager = new FileManager();
 		mainW = new PruebasMainWindow(this);
 		double[] valores = new double[50];
@@ -29,7 +39,12 @@ public class Control implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (ActionsE.valueOf(e.getActionCommand())) {
 		case MEDIAS:
-			break;
+			if (FILETOREAD != null) {
+				medias();
+			} else {
+				mainW.showErrorMessage(MyConstants.ERR_NO_FILE_SELECTED);
+				break;
+			}
 		case VARIANZA:
 			break;
 		case KS:
@@ -37,6 +52,9 @@ public class Control implements ActionListener {
 		case CHI2:
 			break;
 		case POKER:
+			break;
+		case SELECT_FILE:
+			FILETOREAD = mainW.getFileFromFileChooser();
 			break;
 		}
 	}
@@ -69,5 +87,17 @@ public class Control implements ActionListener {
 		aux.add(0.700753);	aux.add(0.391825);	aux.add(0.346095);	aux.add(0.517212);	aux.add(0.824114);	
 		aux.add(0.427438);	aux.add(0.443694);	aux.add(0.161216);	aux.add(0.376285);	aux.add(0.348020);
 		return aux;
+
+	private void medias() {
+		ArrayList<Double> pseudoRandomNumbers = new ArrayList<Double>();
+		try {
+			pseudoRandomNumbers = fileManager.readFile(FILETOREAD);
+		} catch (IOException e) {
+			mainW.showErrorMessage(MyConstants.ERR_READ_FILE);
+		}
+
+		double acceptanceMargin = mainW.getMediasAcceptanceMargin(pseudoRandomNumbers);
+		boolean paso = medias.mediasTesting(acceptanceMargin, pseudoRandomNumbers);
+		mainW.mediasApprovedProve(paso, medias.getResults());
 	}
 }

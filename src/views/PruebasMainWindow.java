@@ -3,6 +3,8 @@ package views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,10 +12,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import constants.MyConstants;
+import views.components.OwnJFileChooser;
 
 public class PruebasMainWindow extends JFrame {
 
 	private JTabbedPane panelesPruebas;
+	private OwnJFileChooser fileChooser;
 
 	private PanelMedias panelMedias;
 	private PanelVarianza panelVarianza;
@@ -51,16 +55,31 @@ public class PruebasMainWindow extends JFrame {
 
 		add(panelesPruebas);
 
+		fileChooser = new OwnJFileChooser();
+
 		setVisible(true);
 	}
 
+	public File getFileFromFileChooser() {
+		int option = fileChooser.showOpenDialog(this);
+		return option != 1 ? fileChooser.getSelectedFile() : null;
+	}
+	
+	public double getMediasAcceptanceMargin(ArrayList<Double> dataForTable) {
+		return panelMedias.getAcceptanceMargin(dataForTable);
+	}
+	
+	public void mediasApprovedProve(boolean isApproved, Object[] results) {
+		panelMedias.approvedProve(isApproved, results);
+	}
+ 
 	/**
 	 * Muestra el mensaje por parametro en un JOptionPane con icono de error
 	 * 
 	 * @param errorMessage to show to the user
 	 */
 	public void showErrorMessage(String errorMessage) {
-		JOptionPane.showMessageDialog(this, errorMessage, "� ERROR !", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, errorMessage, "ERROR !", JOptionPane.ERROR_MESSAGE);
 	}
 
 	public ImageIcon createImageIcon(String path) {

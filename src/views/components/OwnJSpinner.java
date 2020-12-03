@@ -15,7 +15,13 @@ public class OwnJSpinner extends JSpinner {
 		setBorder(BorderFactory.createTitledBorder(text));
 		setBackground(Color.WHITE);
 		setFont(new Font(MyConstants.FONT_ARIAL, 0, 14));
-		setModel(new SpinnerNumberModel(1, 1, Integer.MAX_VALUE - 10000, 1));
+	}
+
+	public OwnJSpinner(String text, boolean doubleLimits) {
+		setBorder(BorderFactory.createTitledBorder(text));
+		setBackground(Color.WHITE);
+		setFont(new Font(MyConstants.FONT_ARIAL, 0, 14));
+		setModel(new SpinnerNumberModel(0.95, 0.00, 1.00, 0.01));
 	}
 
 	private static final long serialVersionUID = 1L;
