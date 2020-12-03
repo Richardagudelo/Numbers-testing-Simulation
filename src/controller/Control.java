@@ -28,11 +28,15 @@ public class Control implements ActionListener {
 		medias = new Medias();
 
 		fileManager = new FileManager();
-		mainW = new PruebasMainWindow(this);
-		double[] valores = new double[50];
+		ArrayList<Double> valores;
 		valores =infoProfe();
 		varianza = new Varianza(valores,.95);
 		ks = new KS(infoProfeKS(),95,5);
+		mainW = new PruebasMainWindow(this,varianza.getDatos(), ks.getDatos());
+		mainW.fillTable(valores);
+		mainW.fillTable2(infoProfeKS());
+		mainW.crearTabla2();
+		mainW.fillTable3(ks.getInicial(), ks.getFinalx(),ks.getFrecObt(),ks.getfAcum(),ks.getpObt(),ks.getfEsperA(),ks.getpEsp(),ks.getDif());
 	}
 
 	@Override
@@ -59,18 +63,18 @@ public class Control implements ActionListener {
 		}
 	}
 	
-	public double[] infoProfe() {
-		double[] aux = new double[50];
-		aux[0]=0.031440;	aux[1]=0.311271;	aux[2]=0.928426;	aux[3]=0.699545;	aux[4]=0.070885;	
-		aux[5]=0.263751;	aux[6]=0.896510;	aux[7]=0.601238;	aux[8]=0.695186;	aux[9]=0.257217;	
-		aux[10]=0.661090;	aux[11]=0.911817;	aux[12]=0.766321;	aux[13]=0.834743;	aux[14]=0.463014;	
-		aux[15]=0.209180;	aux[16]=0.723503;	aux[17]=0.180494;	aux[18]=0.157221;	aux[19]=0.414227;	
-		aux[20]=0.833130;	aux[21]=0.617190;	aux[22]=0.525914;	aux[23]=0.199922;	aux[24]=0.485106;	
-		aux[25]=0.104745;	aux[26]=0.021767;	aux[27]=0.049527;	aux[28]=0.730993;	aux[29]=0.265738;
-		aux[30]=0.444933;	aux[31]=0.916792;	aux[32]=0.688692;	aux[33]=0.783611;	aux[34]=0.297193;	
-		aux[35]=0.702240;	aux[36]=0.459911;	aux[37]=0.228080;	aux[38]=0.191410;	aux[39]=0.161257;	
-		aux[40]=0.712137;	aux[41]=0.596760;	aux[42]=0.116946;	aux[43]=0.833208;	aux[44]=0.008572;	
-		aux[45]=0.057809;	aux[46]=0.861116;	aux[47]=0.915069;	aux[48]=0.078038;	aux[49]=0.002133;
+	public ArrayList<Double> infoProfe() {
+		ArrayList<Double>aux = new ArrayList<>();
+		aux.add(0.031440);	aux.add(0.311271);	aux.add(0.928426);	aux.add(0.699545);	aux.add(0.070885);	
+		aux.add(0.263751);	aux.add(0.896510);	aux.add(0.601238);	aux.add(0.695186);	aux.add(0.257217);	
+		aux.add(0.661090);	aux.add(0.911817);	aux.add(0.766321);	aux.add(0.834743);	aux.add(0.463014);	
+		aux.add(0.209180);	aux.add(0.723503);	aux.add(0.180494);	aux.add(0.157221);	aux.add(0.414227);	
+		aux.add(0.833130);	aux.add(0.617190);	aux.add(0.525914);	aux.add(0.199922);	aux.add(0.485106);	
+		aux.add(0.104745);	aux.add(0.021767);	aux.add(0.049527);	aux.add(0.730993);	aux.add(0.265738);
+		aux.add(0.444933);	aux.add(0.916792);	aux.add(0.688692);	aux.add(0.783611);	aux.add(0.297193);	
+		aux.add(0.702240);	aux.add(0.459911);	aux.add(0.228080);	aux.add(0.191410);	aux.add(0.161257);	
+		aux.add(0.712137);	aux.add(0.596760);	aux.add(0.116946);	aux.add(0.833208);	aux.add(0.008572);	
+		aux.add(0.057809);	aux.add(0.861116);	aux.add(0.915069);	aux.add(0.078038);	aux.add(0.002133);
 		return aux;
 	}
 	
