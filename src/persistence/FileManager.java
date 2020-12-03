@@ -10,25 +10,21 @@ public class FileManager {
 
 	/**
 	 * Lee un archivo tipo .txt especificado
-	 * 
-	 * @param pathname  la ruta donde esta el archivo, llegara en JFileChooser
-	 * @param separator el separador del archivo, ej comas, se pedira por UI
-	 * @return una lista de numeros pseudoaleatorios enteros leidos del archivo
+	 * @param fileToRead el archivo a leer viene del controlador
+	 * @return una lista de numeros pseudoaleatorios leidos, decimales
 	 * @throws IOException excepcion de lectura de archivos
 	 */
-	public ArrayList<Integer> readFile(String pathname, String separator) throws IOException {
-		File file = new File(pathname);
-
-		FileReader fileReader = new FileReader(file);
+	public ArrayList<Double> readFile(File fileToRead) throws IOException {
+		FileReader fileReader = new FileReader(fileToRead);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-		ArrayList<Integer> pseudoNumbers = new ArrayList<Integer>();
+		ArrayList<Double> pseudoNumbers = new ArrayList<Double>();
 
 		String data = "";
 		while ((data = bufferedReader.readLine()) != null) {
-			String[] lineData = data.split(separator);
+			String[] lineData = data.split("#");
 			for (String number : lineData) {
-				pseudoNumbers.add(Integer.parseInt(number));
+				pseudoNumbers.add(Double.parseDouble(number.replace(',', '.')));
 			}
 		}
 
