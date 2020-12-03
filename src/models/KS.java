@@ -15,11 +15,8 @@ public class KS{
 		this.alfa=alfa;
 		numDatos=listaDatos.size();
 		obtenerRPromedio();
-		System.out.println("el promedio de R es: "+rPromedio);
 		asignarMayor();
 		asignarMenor();
-		System.out.println("el valor minimo es: "+menor);
-		System.out.println("el valor mayor es: "+mayor);
 		llenarDatosIF();
 		llenarFrecuencia();
 		llenarFrecuenciaAcumulada();
@@ -28,8 +25,6 @@ public class KS{
 		llenarPEsperada();
 		llenarDiferencia();
 		buscarMayorDmax();
-		System.out.println(dMax);
-		buscarMayorDmaxP();
 		dMaxp=0.1884; //debido a la confiabilidad y erro, esta en la tabla, viene por defecto
 		//aqui para utilizar siempre a ese dato.
 		validarCumplimiento();
@@ -41,11 +36,6 @@ public class KS{
 		}else {
 			cumple=false;
 		}
-	}
-
-	private void buscarMayorDmaxP() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	private void buscarMayorDmax() {
@@ -61,7 +51,11 @@ public class KS{
 	private void llenarDiferencia() {
 		dif = new double[10];
 		for (int i = 0; i < dif.length; i++) {
-			dif[i]= Math.abs(pEsp[i]-pObt[i]);
+			if(pEsp[i]-pObt[i]<0) {
+				dif[i]= (pEsp[i]-pObt[i])*-1;
+			}else {
+				dif[i]= (pEsp[i]-pObt[i]);
+			}
 		}
 	}
 
@@ -161,5 +155,56 @@ public class KS{
 			}
 		}
 		menor =valor;
+	}
+
+	public double[] getDatos() {
+		double[] aux = new double[6];
+		aux[0]=menor;
+		aux[1]=mayor;
+		aux[2]=rPromedio;
+		aux[3]=dMax;
+		aux[4]=dMaxp;
+		if(cumple==true) {
+			aux[5]= 1;
+		}else {
+			aux[5]=0;
+		}
+		return aux;
+	}
+
+	public double getrPromedio() {
+		return rPromedio;
+	}
+
+	public double[] getInicial() {
+		return inicial;
+	}
+
+	public double[] getFinalx() {
+		return finalx;
+	}
+
+	public double[] getFrecObt() {
+		return frecObt;
+	}
+
+	public double[] getfAcum() {
+		return fAcum;
+	}
+
+	public double[] getpObt() {
+		return pObt;
+	}
+
+	public double[] getfEsperA() {
+		return fEsperA;
+	}
+
+	public double[] getpEsp() {
+		return pEsp;
+	}
+
+	public double[] getDif() {
+		return dif;
 	}
 }
